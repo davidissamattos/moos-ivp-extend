@@ -1,0 +1,29 @@
+// MOOS file
+
+ServerHost = localhost
+ServerPort = 9000
+
+//------------------------------------------
+// Antler configuration  block
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 2000
+
+  Run = MOOSDB      	    	@ NewConsole = true
+  Run = pImageXRelay  		    @ NewConsole = true
+  Run = pImageXRelayDisplay     @ NewConsole = true
+}
+
+ProcessConfig = pImageXRelay
+{
+   AppTick   = 0.2
+   CommsTick = 0.2
+   IMAGE1 = COUNTS
+}
+
+ProcessConfig = pImageXRelayDisplay
+{
+   AppTick   = 0.2
+   CommsTick = 0.2
+}
+

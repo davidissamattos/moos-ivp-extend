@@ -1,0 +1,162 @@
+//-------------------------------------------------
+// NAME: David
+// FILE: alpha.moos
+//-------------------------------------------------
+
+ServerHost = localhost
+ServerPort = 9000
+Community  = alpha
+
+MOOSTimeWarp = 1
+TERM_REPORTING = true
+
+
+// ITA - Borda do Lago
+LatOrigin  = -23.20832300
+LongOrigin = -45.87455400
+
+//------------------------------------------
+// Antler configuration  block
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 500
+ 
+ 
+ //Aplicativos do MOOS-IvP para a navegacao
+ //-----------------------------------------
+  Run = MOOSDB		    @ NewConsole = false
+  Run = pLogger         @ NewConsole = true
+  Run = pHelmIvP	    @ NewConsole = false
+  Run = uProcessWatch	@ NewConsole = false
+  Run = pNodeReporter	@ NewConsole = false
+  
+  //	Para a aquisicao dos dados
+  //--------------------------------------
+  Run = iSerial			@ NewConsole = true
+  Run = pmyGeodesy		@ NewConsole = true
+}
+
+//------------------------------------------
+// uProcessWatch config block
+
+ProcessConfig = uProcessWatch
+{
+  AppTick   = 10
+  CommsTick = 10
+
+  summary_wait = 5
+
+  nowatch   = uXMS*
+  nowatch   = uMAC*
+  nowatch   = uPokeDB*
+  nowatch   = uTermCommand*
+  watch_all = true
+}
+
+
+//------------------------------------------
+// pLogger config block
+
+ProcessConfig = pLogger
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  AsyncLog = true
+
+  // For variables that are published in a bundle on their first post,
+  // explicitly declare their logging request
+
+  Log = IVPHELM_LIFE_EVENT @ 0 NOSYNC
+
+  LogAuxSrc = true
+  WildCardLogging = true
+  // WildCardOmitPattern = *_STATUS
+  WildCardExclusionLog = true
+}
+
+
+//------------------------------------------
+// pHelmIvP config block
+
+ProcessConfig = pHelmIvP
+{
+  MaxAppTick = 10
+  AppTick    = 10
+  CommsTick  = 10
+
+  term_report_interval=0
+
+  bhv_dir_not_found_ok = true
+  ivp_behavior_dir = /Users/ddmikerb
+
+  behaviors  = alpha.bhv
+  domain     = course:0:359:360
+  domain     = speed:0:5:20
+}
+
+//------------------------------------------
+// pNodeReporter config block
+
+ProcessConfig = pNodeReporter
+{
+  MaxAppTick    = 10
+  AppTick	= 10
+  CommsTick	= 11
+
+  platform_type   = SHIP
+  platform_length = 1
+}
+
+//CROSSFILL_POLICY = fill-empty
+
+// This block is here in conjunction with the uTermCommand 
+// documentation to demonstrate functionality of that tool.
+// This mission may be alternately 
+
+ProcessConfig = uTermCommandFoo
+{
+  cmd  = override_true  -->  MOOS_MANUAL_OVERRIDE --> true
+  cmd  = override_false -->  MOOS_MANUAL_OVERRIDE --> false
+  cmd  = deploy_true    -->  DEPLOY --> true
+  cmd  = deploy_false   -->  DEPLOY --> false
+  cmd  = return_true    -->  RETURN --> true
+  cmd  = return_false   -->  RETURN --> false
+}
+
+
+
+//------------------------------------------
+// iSerial config block
+ProcessConfig = iSerial
+{
+   //Configuracao deve ser alta para nao acumular valores no buffer
+   AppTick   = 0
+   CommsTick = 0
+   
+   M1=M1
+   M2=M2
+   
+   //Opcoes Para interface serial
+   //SLAB_USBtoUART -> com o aparelho da Sure
+   //usbmodem1411 -> conectado diretamente com o arduino
+   
+   //SERIAL_PORT = /dev/tty.SLAB_USBtoUART
+   SERIAL_PORT = /dev/tty.usbmodem1411
+   BAUDRATE = 9600
+   OPTIONS = ARDUINO
+}
+
+//------------------------------------------
+ProcessConfig = pmyGeodesy
+{
+   AppTick   = 100
+   CommsTick = 100
+   
+   //Lago ITA
+   LAT_ORIGIN = -23.20832300
+   LON_ORIGIN = -45.87455400
+   
+   ALTITUDE = 606
+   	// Altitude pela fonte 	//http://www.daftlogic.com/sandbox-google-maps-find-altitude.htm ou google maps
+}

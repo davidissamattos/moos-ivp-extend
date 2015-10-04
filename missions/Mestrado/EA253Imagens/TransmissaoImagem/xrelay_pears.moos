@@ -1,0 +1,47 @@
+ServerHost = localhost
+ServerPort = 9200
+Community  = pears
+
+//------------------------------------------
+// Antler configuration  block
+
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 200
+
+  Run = MOOSDB       @ NewConsole = false
+  Run = pXRelay      @ NewConsole = true ~ pXRelay_PEARS
+  Run = pMOOSBridge  @ NewConsole = true ~ pMOOSBridge_PEARS
+  Run = uXMS         @ NewConsole = true
+}
+
+
+//------------------------------------------
+// Second pXRelay configuration block
+
+ProcessConfig = pXRelay_PEARS
+{
+   OUTGOING_VAR = PEARS
+   INCOMING_VAR = APPLES
+}
+
+//------------------------------------------
+// uXMS configuration block
+
+ProcessConfig = uXMS
+{
+   DISPLAY_SOURCE = true
+   REFRESH_MODE   = streaming
+   VAR            = APPLES, PEARS, DB_UPTIME
+}
+
+
+
+//------------------------------------------
+ProcessConfig = pMOOSBridge_PEARS
+{
+  UDPListen        = 9201 
+  BridgeFrequency  = 0 
+
+  UDPSHARE = [PEARS] -> apples @ 192.168.1.111:9101 [PEARS]
+}

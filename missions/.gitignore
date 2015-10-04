@@ -1,3 +1,6 @@
-Mestrado
+*.alog
+*.blog
+*.xlog
+*.ylog
 PythonScripts
 TG
