@@ -1,0 +1,11 @@
+//------------------------------------------------
+// iToApacheJSON config block
+
+ProcessConfig = iToApacheJSON
+{
+   AppTick   = 4
+   CommsTick = 4
+   Variables = , , , , , , , , 
+   PathToApacheWebserver = 
+}
+

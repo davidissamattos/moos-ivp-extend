@@ -1,0 +1,9 @@
+//------------------------------------------------
+// pImageXRelayDisplay config block
+
+ProcessConfig = pImageXRelayDisplay
+{
+   AppTick   = 0.2
+   CommsTick = 0.2
+}
+

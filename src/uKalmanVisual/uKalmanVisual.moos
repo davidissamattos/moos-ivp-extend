@@ -1,0 +1,9 @@
+//------------------------------------------------
+// uKalmanVisual config block
+
+ProcessConfig = uKalmanVisual
+{
+   AppTick   = 4
+   CommsTick = 4
+}
+

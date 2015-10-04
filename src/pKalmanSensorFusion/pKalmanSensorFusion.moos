@@ -1,0 +1,10 @@
+//------------------------------------------------
+// pKalmanSensorFusion config block
+
+ProcessConfig = pKalmanSensorFusion
+{
+   AppTick   = 4
+   CommsTick = 4
+   BETA = 0.005
+}
+

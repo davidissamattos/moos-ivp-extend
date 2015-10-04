@@ -1,0 +1,11 @@
+//------------------------------------------------
+// pImageTransmitt config block
+
+ProcessConfig = pImageTransmitt
+{
+   AppTick   = 4
+   CommsTick = 4
+   IMAGE = COUNTS
+   CAMERA_NUMBER = 0
+}
+
