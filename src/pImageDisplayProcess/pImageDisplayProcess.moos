@@ -1,9 +1,0 @@
-//------------------------------------------------
-// pImageDisplayProcess config block
-
-ProcessConfig = pImageDisplayProcess
-{
-   AppTick   = 4
-   CommsTick = 4
-}
-
