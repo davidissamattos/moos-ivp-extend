@@ -5,7 +5,8 @@ ProcessConfig = iToApacheJSON
 {
    AppTick   = 4
    CommsTick = 4
-   Variables = , , , , , , , , 
-   PathToApacheWebserver = 
+   VARIABLES = , , , , , , , , 
+   PATH = 
+   JSON_FILE_NAME = ....
 }
 

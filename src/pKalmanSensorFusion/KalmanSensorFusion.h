@@ -107,6 +107,9 @@ class KalmanSensorFusion : public CMOOSApp
     runge_kutta4< state_type > stepper;//tipo de integracao
     double tempo_anterior;
     double tempo_atual;
+	
+	//Variable to ignore the kalman heading and use the compass output
+	bool usecompass;
 
  private: // State variables
    unsigned int m_iterations;

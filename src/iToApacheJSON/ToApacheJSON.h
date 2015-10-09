@@ -9,6 +9,22 @@
 #define ToApacheJSON_HEADER
 
 #include "MOOS/libMOOS/MOOSLib.h"
+#include "boost/filesystem.hpp"   // includes all needed Boost.Filesystem declarations
+#include <stdio.h>
+#include <string>
+#include <iostream>
+#include <vector>
+#include <stdlib.h>     /* atof */
+#include <math.h>       /* sin */
+#include <ctime>
+#include <fstream>
+#include <sstream> //Passing string through startup
+#include "json/json.h"
+
+
+
+using namespace std;
+using namespace boost::filesystem;
 
 class ToApacheJSON : public CMOOSApp
 {
@@ -28,6 +44,19 @@ class ToApacheJSON : public CMOOSApp
  private: // State variables
    unsigned int m_iterations;
    double       m_timewarp;
+   
+   //Variables to subscribe and post
+   std::vector<string> variables;
+   std::vector<string> variablesValues;
+   path *jsonpath;
+   path *jsonFileWithPath;
+   std::string community;
+   std::string json_file_name;
+   //Json specific files
+   Json::Value root;
+   std::vector<Json::Value> VarValue;
+   ofstream file;
+   
 };
 
 #endif 

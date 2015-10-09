@@ -60,9 +60,6 @@ KalmanSensorFusion::KalmanSensorFusion()
 	PK1 = P0;
 	
 	
-	
-	
-	
 	//Medidas e estimativas
 	U_IMU.resize(3);U_IMU<<0,0,0;
 	compass = 0;
@@ -99,6 +96,8 @@ KalmanSensorFusion::KalmanSensorFusion()
 	ic=0;
 	Ngps = 4;
 	Tgps = 4*T;
+	
+	usecompass = true;
 
 }
 
@@ -198,13 +197,23 @@ bool KalmanSensorFusion::Iterate()
 		double px = XK_INS[2];
 		double py = XK_INS[3];
 		double psi = XK_INS[4];
-		double heading = (90 - psi*180/pi);
+		
+		//Comparisson to ignore or not the psi estimated by the kalman filter
+		double heading;
+		if (usecompass)
+		{
+			heading = (90 - psi_compass*180/pi);
+		}
+		else
+		{
+			heading = (90 - psi*180/pi);
+		}
+		//Back to the correct frame
 		while(heading<0 || heading>360)
 		{
 			if(heading<0){heading = heading + 360;}
 			if(heading>360){heading = heading - 360;}
 		}
-		
 		double speed = sqrt(vx*vx + vy*vy);
 		//Notificando o MOOSDB
 		for(int i=0;i<8;i++)
@@ -284,12 +293,18 @@ bool KalmanSensorFusion::OnStartUp()
   	  		  std::string valor = value;
   	  		  GYROvar = std::stod(valor.c_str());
 			}
+			
+		  	if(param == "USE_COMPASS")
+			{
+  	  		  if(value == "YES" || value == "Yes" || value == "yes" ) usecompass = true;
+			  else usecompass = false;
+			}
 		}
 		
 		//Updating the Variance matrix
-		VarCOMP << COMPASSvar;//Variancia da Bussola
-		VarGPS << GPSvar,GPSvar;//Variancia do GPS	
-		VarIMU << ACCELvar, ACCELvar, GYROvar;//Variancia [Axb Ayb Wz]
+		VarCOMP << COMPASSvar;//Compass variance
+		VarGPS << GPSvar,GPSvar;//GPS variance	
+		VarIMU << ACCELvar, ACCELvar, GYROvar;//Accel and gyro variance [Axb Ayb Wz]
 		QK = VarIMU.asDiagonal();
 		RK << VarGPS[0], 	0,	 	0,
 				0,		VarGPS[1],	0,
@@ -309,7 +324,7 @@ bool KalmanSensorFusion::OnStartUp()
 
 void KalmanSensorFusion::RegisterVariables()
 {
-	//Registra para as variaveis do acelerometro, giroscopio, bussola e GPS
+	//Register for variables
 	//Acelerometro
 	m_Comms.Register("IMU_AX", 0);
 	m_Comms.Register("IMU_AY", 0);
@@ -320,7 +335,7 @@ void KalmanSensorFusion::RegisterVariables()
 	m_Comms.Register("IMU_WY", 0);
 	m_Comms.Register("IMU_WZ", 0);
 	m_Comms.Register("IMU_WTIME", 0);
-	//Bussola
+	//Compass
 	m_Comms.Register("IMU_HEADING", 0);
 	//GPS
 	m_Comms.Register("GPS_X", 0);
@@ -336,7 +351,7 @@ void KalmanSensorFusion::KalmanFilter()
 	U_INS = U_IMU - BiasK;//[abx aby wz]
 	//cout << "BiasAx: " << BiasK[0] <<endl;
 	//cout << "Wz: " << U_INS[2] <<endl;
-	//Integrando
+	//Integration of the model
 	x[0]=XK_INS[0];
 	x[1]=XK_INS[1];
 	x[2]=XK_INS[2];
@@ -352,14 +367,14 @@ void KalmanSensorFusion::KalmanFilter()
 			double vx = x[0];
 			double vy = x[1];
 			double psi = x[4];
-			//equacao para o dxINS
+			//dxINS equation
 			dxdt[0] = abx*cos(psi) - aby*sin(psi); 
 			dxdt[1] = abx*sin(psi) + aby*cos(psi);
 			dxdt[2] = vx; 
 			dxdt[3] = vy;
 			dxdt[4] = wz;
 	 	}, x , t , dt );
- 	//Salvando o resultado da integracao em uma variavel de outra biblioteca
+ 	// Saving the output of the integration in another variable
 	XK1_INS[0] = x[0];
 	XK1_INS[1] = x[1];
 	XK1_INS[2] = x[2];
@@ -368,14 +383,14 @@ void KalmanSensorFusion::KalmanFilter()
 
 	BiasK1 = BiasK;
 
-	//Propagacao do Filtro de Kalman
-	// Matriz da dinamica de erros
+	//Kalman filter propagation
+	// Dynamic errors matrix
 	double x5ins = XK_INS[4];
 	double alpha = cos(x5ins);
 	double beta = sin(x5ins);
-	//Matriz discreta - Obtida utilizando o software Mathematica
+	//Discrete matrix obtained using the software Mathematica 
 	MatrixXd Ad_ERROS;
-	MatrixXd Ad_ERROS_T;//Matriz transposta
+	MatrixXd Ad_ERROS_T;//Transpose of Ad_ERROS
 	Ad_ERROS.resize(8,8);
 	Ad_ERROS_T.resize(8,8);
 	Ad_ERROS<< 1, 0, 0, 0, 0,	T*alpha,		-T*beta,			0,
@@ -389,7 +404,7 @@ void KalmanSensorFusion::KalmanFilter()
 	Ad_ERROS_T = Ad_ERROS.transpose();
 	
 	MatrixXd Bd_ERROS;
-	MatrixXd Bd_ERROS_T;//Transposta
+	MatrixXd Bd_ERROS_T;//Transpose
 	Bd_ERROS.resize(8,3);
 	Bd_ERROS_T.resize(3,8);
 	Bd_ERROS << T*alpha, 		   -T*beta, 			0,
@@ -414,7 +429,7 @@ void KalmanSensorFusion::KalmanFilter()
 		MatrixXd inter;inter.resize(3,3);
 		MatrixXd inter_inv;inter_inv.resize(3,3);
 		inter = C_ERROS*PK1*C_ERROS_T + RK; 
-		inter_inv = inter.inverse();//Para 3x3 esse algoritmo e otmizado,
+		inter_inv = inter.inverse();//Good until 3x3 matrix
 		GK = PK1*C_ERROS_T*inter_inv;
 		
 		MatrixXd pk1_inter;pk1_inter.resize(8,8);
@@ -425,7 +440,6 @@ void KalmanSensorFusion::KalmanFilter()
 		Vector3d GPS_COMPASS; GPS_COMPASS << GPS[0], GPS[1], psi_compass;
 		Y_ERRO =  XINS_3_4_5 - GPS_COMPASS;
 		
-		//Modificacao 1 set 2015 -> conferir
 		VectorXd ZeroBias;ZeroBias.resize(8);ZeroBias << 0, 0, 0, 0, 0, BiasK1[0], BiasK1[1], BiasK1[2];
 		
 		X_ERRO = ZeroBias + GK*Y_ERRO;
@@ -440,7 +454,7 @@ void KalmanSensorFusion::KalmanFilter()
 		ic=0;
 	}
 	
-	//Proximo estado
+	//Next kalman filter step
 	PK = PK1;
 	XK_INS = XK1_INS;
 	BiasK = BiasK1;

@@ -1,6 +1,6 @@
-pImageDisplayProcess
-pImageRelay
-pImageTransmitt
-pImageXRelayDisplay
-pNavIMU
-uBarcoDouglas
+pImageDisplayProcess/*
+pImageRelay/*
+pImageTransmitt/*
+pImageXRelayDisplay/*
+pNavIMU/*
+uBarcoDouglas/*
