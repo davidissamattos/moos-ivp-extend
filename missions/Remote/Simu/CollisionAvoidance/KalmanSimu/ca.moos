@@ -1,0 +1,275 @@
+//-------------------------------------------------
+// NAME: David
+// FILE: ca.moos
+//-------------------------------------------------
+
+ServerHost = localhost
+ServerPort = 9000
+Community  = ca
+
+MOOSTimeWarp = 1
+TERM_REPORTING = true
+
+
+// ITA - Borda do Lago
+LatOrigin  = -23.20832300
+LongOrigin = -45.87455400
+
+//------------------------------------------
+// Antler configuration  block
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 500
+ 
+ //Aplicativos do MOOS-IvP para a navegacao
+ //-----------------------------------------
+  Run = MOOSDB		    @ NewConsole = false
+  Run = pLogger         @ NewConsole = false
+  Run = pControleBarco	@ NewConsole = false
+  Run = pHelmIvP	    @ NewConsole = false
+  Run = pMarineViewer	@ NewConsole = false
+  Run = uProcessWatch	@ NewConsole = false
+  Run = pNodeReporter	@ NewConsole = false
+  
+  //	Controle Manual
+  //--------------------------------------
+ // Run = pManual			@ NewConsole = true
+  
+  //Simulando o Barco
+  //--------------------------------------
+  Run = uBarcoSimu3Kalman		@ NewConsole = false
+  Run = pKalmanSensorFusion		@ NewConsole = true
+  //Run = uKalmanVisual			@ NewConsole = true
+}
+
+//------------------------------------------------
+// pKalmanSensorFusion config block
+
+ProcessConfig = pKalmanSensorFusion
+{
+   AppTick   = 4
+   CommsTick = 4
+   BETA = 0.01
+   //necessario escrever desta forma
+   //P0= Vx  Vy    X   Y     Psi    ax  ay  wz
+   P0 =  10, 10,  12,  12,   0.01,  10, 10, 5
+   GPS_VAR = 1
+   COMPASS_VAR = 0.1
+   ACCEL_VAR = 0.1
+   GYRO_VAR = 0.1
+}
+
+//------------------------------------------------
+// uKalmanVisual config block
+
+ProcessConfig = uKalmanVisual
+{
+   AppTick   = 4
+   CommsTick = 4
+}
+
+
+
+//------------------------------------------------
+// uBarcoSimuKalman config block
+
+ProcessConfig = uBarcoSimu3Kalman
+{
+   AppTick   = 4
+   CommsTick = 4
+   SIGMA_GPSX = 0.1
+   SIGMA_GPSY = 0.1
+   SIGMA_AX = 0.1
+   SIGMA_AY = 0.1
+   SIGMA_WZ = 0.01
+   SIGMA_HEADING = 0.01
+   BIAS_AX = 0.1
+   BIAS_AY = 0.1
+   BIAS_WZ = 0.1
+   POSX = -5
+   POSY = -7
+}
+
+
+//------------------------------------------
+// uProcessWatch config block
+
+ProcessConfig = uProcessWatch
+{
+  AppTick   = 10
+  CommsTick = 10
+
+  summary_wait = 5
+
+  nowatch   = uXMS*
+  nowatch   = uMAC*
+  nowatch   = uPokeDB*
+  nowatch   = uTermCommand*
+  watch_all = true
+}
+
+
+//------------------------------------------
+// pLogger config block
+
+ProcessConfig = pLogger
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  AsyncLog = true
+
+  // For variables that are published in a bundle on their first post,
+  // explicitly declare their logging request
+
+  Log = IVPHELM_LIFE_EVENT @ 0 NOSYNC
+
+  LogAuxSrc = true
+  WildCardLogging = true
+  // WildCardOmitPattern = *_STATUS
+  WildCardExclusionLog = true
+}
+
+
+//------------------------------------------
+// pHelmIvP config block
+
+ProcessConfig = pHelmIvP
+{
+  MaxAppTick = 10
+  AppTick    = 10
+  CommsTick  = 10
+
+  term_report_interval=0
+
+  bhv_dir_not_found_ok = true
+  ivp_behavior_dir = /Users/ddmikerb
+
+  behaviors  = ca.bhv
+  domain     = course:0:359:360
+  domain     = speed:0:5:20
+}
+
+//------------------------------------------
+// Controlador do barco
+
+ ProcessConfig = pControleBarco
+ {
+    AppTick   = 1
+    CommsTick = 1
+   
+ }
+ 
+//------------------------------------------
+// pMarineViewer config block
+
+ProcessConfig = pMarineViewer
+{
+  AppTick    = 10
+  CommsTick  = 10
+
+  tiff_file            = ITA_lago.tif
+
+  set_pan_x            = -20
+  set_pan_y            = -20
+  zoom                 = 0.6
+  vehicle_shape_scale  = 1.5
+  hash_delta           = 50
+  hash_shade           = 0.4
+  hash_viewable        = true
+
+  trails_point_size   = 1
+
+  // Appcast configuration
+  appcast_height       = 75
+  appcast_width        = 30
+  appcast_viewable     = true
+  appcast_color_scheme = indigo
+  nodes_font_size      = medium
+  procs_font_size      = medium
+  appcast_font_size    = small
+  
+  left_context[survey-point] = DEPLOY=true
+  left_context[survey-point] = MOOS_MANUAL_OVERIDE=false
+  left_context[survey-point] = RETURN=false
+
+  right_context[return] = DEPLOY=true
+  right_context[return] = MOOS_MANUAL_OVERIDE=false
+  right_context[return] = RETURN=false
+
+//Testes com a interface
+  //Mudancas com o mouse
+  left_context[return_point] = VIEW_SEGLIST = pts={$(XPOS),$(YPOS)},label=return_home
+  left_context[return_point]  = RETURN_UPDATE = points=$(XPOS),$(YPOS)
+  left_context[return_point]  = RETURN = true
+  left_context[view_point] = VIEW_POINT = x=$(XPOS),y=$(YPOS),label=mypoint
+  scope = WPT_UPDATE
+  scope  = NAV_X
+  scope  = NAV_Y
+  
+//fim das alteracoes
+
+  
+
+  scope  = RETURN
+  scope  = WPT_STAT
+  scope  = VIEW_SEGLIST
+  scope  = VIEW_POINT
+  scope  = VIEW_POLYGON
+  scope  = MVIEWER_LCLICK
+  scope  = MVIEWER_RCLICK
+
+//Configuracoes dos botoes
+  //button_name = text # VARIABLE=value
+  button_one = START # DEPLOY=true #  MOOS_MANUAL_OVERRIDE=false
+  button_one = MOOS_MANUAL_OVERRIDE=false # RETURN=false 
+  button_two = RETURN:T # RETURN=true
+  button_three = RETURN:F # RETURN=false
+  
+  
+
+  action  = MENU_KEY=deploy # DEPLOY = true # RETURN = false
+  action+ = MENU_KEY=deploy # MOOS_MANUAL_OVERRIDE=false
+  action  = RETURN=true
+  action  = UPDATES_RETURN=speed=1.4
+}
+
+//------------------------------------------
+// pNodeReporter config block
+
+ProcessConfig = pNodeReporter
+{
+  MaxAppTick    = 10
+  AppTick	= 10
+  CommsTick	= 11
+
+  platform_type   = SHIP
+  platform_length = 1
+}
+
+//CROSSFILL_POLICY = fill-empty
+
+// This block is here in conjunction with the uTermCommand 
+// documentation to demonstrate functionality of that tool.
+// This mission may be alternately 
+
+ProcessConfig = uTermCommandFoo
+{
+  cmd  = override_true  -->  MOOS_MANUAL_OVERRIDE --> true
+  cmd  = override_false -->  MOOS_MANUAL_OVERRIDE --> false
+  cmd  = deploy_true    -->  DEPLOY --> true
+  cmd  = deploy_false   -->  DEPLOY --> false
+  cmd  = return_true    -->  RETURN --> true
+  cmd  = return_false   -->  RETURN --> false
+}
+
+
+//------------------------------------------------
+// pManual config block
+
+ProcessConfig = pManual
+{
+   AppTick   = 100
+   CommsTick = 100
+   
+}
