@@ -3,3 +3,4 @@
 *.xlog
 *.ylog
 PythonScripts
+other/*
