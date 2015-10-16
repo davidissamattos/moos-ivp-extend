@@ -21,20 +21,23 @@ ProcessConfig = ANTLER
 {
   MSBetweenLaunches = 500
  
- //Aplicativos do MOOS-IvP para a navegacao
+ //Aplicativos do MOOS-IvP para a visualizacao
  //-----------------------------------------
   Run = MOOSDB		    @ NewConsole = false
   Run = pLogger         @ NewConsole = false
   Run = pMarineViewer	@ NewConsole = false
   Run = uProcessWatch	@ NewConsole = false
   Run = pNodeReporter	@ NewConsole = false
+ 
+ // Transmissao de dados
+ //-----------------------------------------
+ // pShare: transmissao de informacoes
+  Run = pShare				@ NewConsole = false
   
   //	Controle Manual
   //--------------------------------------
   Run = pManual			@ NewConsole = true
   
-
-
 }
 
 
@@ -191,4 +194,18 @@ ProcessConfig = pManual
    AppTick   = 100
    CommsTick = 100
    
+}
+
+//------------------------------------------
+//pShare block
+ProcessConfig = pShare 
+{
+	//Input = route = ComputerYouWantToListen_IP:OUTPUTPORT_of_TheComputer
+	Input = route = 192.168.0.104:9001
+
+	//Output vars -> mission vars and pManual
+	Output = src_name = M1, route = 192.168.0.104:9001
+	Output = src_name = M2, route = 192.168.0.104:9001
+	
+	
 }

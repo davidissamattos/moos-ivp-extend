@@ -18,4 +18,5 @@ from webinterface.webinterfaceview import *
 
 urlpatterns = [
     url(r'^$', index),
+    url(r'^time/$', current_datetime),
 ]

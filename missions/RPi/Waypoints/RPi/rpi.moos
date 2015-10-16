@@ -30,6 +30,10 @@ ProcessConfig = ANTLER
   Run = uProcessWatch	@ NewConsole = false
   Run = pNodeReporter	@ NewConsole = false
   
+ // Transmissao de dados
+ //-----------------------------------------
+ // pShare: transmissao de informacoes
+  Run = pShare				@ NewConsole = false
  
   //Executando no barco real
   //--------------------------------------
@@ -37,9 +41,10 @@ ProcessConfig = ANTLER
   // iSerial: conexao serial com o modem/arduino
   // pGeodesy: conversao entre coordenadas globais e locais. 
   // pKalmanSensorFusion: fusao sensorial
-  Run = pGeodesy				@ NewConsole = true
-  Run = iSerial					@ NewConsole = true
-  Run = pKalmanSensorFusion		@ NewConsole = true
+  
+  Run = pGeodesy				@ NewConsole = false
+  Run = iSerial					@ NewConsole = false
+  Run = pKalmanSensorFusion		@ NewConsole = false
 
 }
 
@@ -199,16 +204,14 @@ ProcessConfig = uTermCommandFoo
 //pShare block
 ProcessConfig = pShare 
 {
+	//Input = route = ComputerYouWantToListen_IP:OUTPUTPORT_of_TheComputer
+	Input = route = 192.168.0.104:9001
 
-	//a verbose way of sharing Y calling it YY and sending //it to port 9832 on this machine
-	//Output = src_name =Y , dest_name = YY , route =192.6.8.3:9832
-
-	//and Y to a different machine while renaming it to ’T’ ￼￼￼￼￼￼￼
-	//Output = Y−>T:192.168.0.5:10000
-	
-	Input = route =localhost:9833
-	//we can of course also use wildcards − this is where it gets←􏰀 interesting
-
-	Output = src_name = X*, route = localhost:9021
+	//Output vars
+	Output = src_name = X_ERRO*, route = 192.168.0.101:9001
+	Output = src_name = NAV_*, route = 192.168.0.101:9001
+	Output = src_name = PK*, route = 192.168.0.101:9001
+	Output = src_name = GPS*, route = 192.168.0.101:9001
+	Output = src_name = IMU*, route = 192.168.0.101:9001
 	
 }
