@@ -4,7 +4,7 @@ sudo pip2 install mod_wsgi
 or
 https://github.com/GrahamDumpleton/mod_wsgi
 
-
+HARD WAY:
 To run use (first configure django as in the site above):
 python manage.py collectstatic
 then
@@ -20,4 +20,10 @@ and run using
 /etc/mod_wsgi-express-80/apachectl start
 /etc/mod_wsgi-express-80/apachectl restart
 /etc/mod_wsgi-express-80/apachectl stop
+
+
+EASY WAY:
+add mod_wsgi.server to apps in django
+python manage.py collectstatic
+python manage.py runmodwsgi --reload-on-changes
     

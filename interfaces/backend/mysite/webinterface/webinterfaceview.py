@@ -5,42 +5,29 @@ import datetime
 
 
 def index(request):
-    t = get_template('table.html')
-    c = Context({'person_name': 'John Smith',  'company': 'Outdoor Equipment','ship_date': datetime.date(2009, 4, 2),'ordered_warranty': False})
-    html = t.render(c)
-    #Assert false
+    indx = get_template('index.html')
+    #Render template
+    c = Context()
+    html = indx.render(c)
     return HttpResponse(html)
 
-
-def current_datetime(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
-    
-def helloweb(request):
-    print 'A'
-    return HttpResponse("Hello world web")
-    
-
-def hours_ahead(request, offset):
-    try:
-        offset = int(offset)
-    except ValueError:
-        raise Http404()
-    dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
-    html = "<html><body>In %s hour(s), it will be %s.</body></html>" % (offset, dt)
-    return HttpResponse(html)
-    
-def mytemplate(request):
-    t = get_template('p1.html')
-    c = Context({'person_name': 'John Smith',  'company': 'Outdoor Equipment','ship_date': datetime.date(2009, 4, 2),'ordered_warranty': False})
+def camera(request):
+    t = get_template('camera.html')
+    #Render template
+    c = Context()
     html = t.render(c)
-    #Assert false
-    return HttpResponse(html)
+    return HttpResponse(t)
     
-def index(request):
-    t = get_template('content.html')
-    c = Context({'person_name': 'John Smith',  'company': 'Outdoor Equipment','ship_date': datetime.date(2009, 4, 2),'ordered_warranty': False})
+def variables(request):
+    t = get_template('variables.html')
+    #Render template
+    c = Context()
     html = t.render(c)
-    #Assert false
+    return HttpResponse(t)
+    
+def info(request):
+    t = get_template('info.html')
+    #static page but renders
+    c = Context()
+    html = t.render(c)
     return HttpResponse(html)

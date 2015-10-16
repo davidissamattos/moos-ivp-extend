@@ -18,5 +18,7 @@ from webinterface.webinterfaceview import *
 
 urlpatterns = [
     url(r'^$', index),
-    url(r'^time/$', current_datetime),
+    url(r'^camera/$', camera),
+    url(r'^variables/$', variables),
+    url(r'^info/$', info),
 ]
