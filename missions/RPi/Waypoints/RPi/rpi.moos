@@ -5,7 +5,7 @@
 
 ServerHost = localhost
 ServerPort = 9000
-Community  = alpha
+Community  = RPi
 
 MOOSTimeWarp = 1
 TERM_REPORTING = true
@@ -34,6 +34,7 @@ ProcessConfig = ANTLER
  //-----------------------------------------
  // pShare: transmissao de informacoes
   Run = pShare				@ NewConsole = false
+  Run = uFldNodeBroker  	@ NewConsole = false
  
   //Executando no barco real
   //--------------------------------------
@@ -199,19 +200,42 @@ ProcessConfig = uTermCommandFoo
 }
 
 
+//==================================================================
+// Inter-vehicle Communication
+//==================================================================
+
+//------------------------------------------
+//uFldNodeBroker block
+ProcessConfig = uFldNodeBroker 
+{
+    AppTick	= 4
+    CommsTick	= 4
+	
+	try_shore_host = pshare_route:localhost:9000
+	try_shore_host = pshare_route:localhost:9001
+	try_shore_host = 192.168.0.101:localhost:9000
+	try_shore_host = 192.168.0.101:localhost:9001
+	
+	//Data to be send to the shoreside
+	bridge = src=NODE_REPORT
+	bridge = src=NODE_REPORT_LOCAL, alias=NODE_REPORT
+	bridge = src=NODE_MESSAGE_LOCAL, alias=NODE_MESSAGE
+	bridge = src=VIEW_*
+	bridge = src=APPCAST*
+	bridge = src=X_ERRO*
+	bridge = src=NAV_*
+	bridge = src=GPS*
+	bridge = src=IMU*
+	bridge = src=PK*
+
+}
+
+
 
 //------------------------------------------
 //pShare block
 ProcessConfig = pShare 
 {
-	//Input = route = ComputerYouWantToListen_IP:OUTPUTPORT_of_TheComputer
-	Input = route = 192.168.0.104:9001
-
-	//Output vars
-	Output = src_name = X_ERRO*, route = 192.168.0.101:9001
-	Output = src_name = NAV_*, route = 192.168.0.101:9001
-	Output = src_name = PK*, route = 192.168.0.101:9001
-	Output = src_name = GPS*, route = 192.168.0.101:9001
-	Output = src_name = IMU*, route = 192.168.0.101:9001
-	
+	//Where to listen
+	Input = route = localhost:9001
 }

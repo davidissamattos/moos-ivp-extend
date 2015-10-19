@@ -16,7 +16,7 @@ def camera(request):
     #Render template
     c = Context()
     html = t.render(c)
-    return HttpResponse(t)
+    return HttpResponse(html)
     
 def variables(request):
     t = get_template('variables.html')

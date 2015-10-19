@@ -66,7 +66,7 @@ bool Manual::OnNewMail(MOOSMSG_LIST &NewMail)
 			if(manualControl=="true") // realiza o controle
 			{
 				//Configuracoes para parar o pHelm
-				//m_Comms.Notify("MOOS_MANUAL_OVERIDE","TRUE");
+				m_Comms.Notify("MOOS_MANUAL_OVERIDE","TRUE");
 				m_Comms.Notify("MOOS_MANUAL_OVERRIDE","TRUE");
 				//Desativar o controle do barco baseado no pHelm
 				m_Comms.Notify("DISABLE_CONTROLEBARCO","true");
@@ -79,7 +79,7 @@ bool Manual::OnNewMail(MOOSMSG_LIST &NewMail)
 			if(manualControl=="false") 
 			{
 				//Configuracoes para voltar o pHelm
-				//m_Comms.Notify("MOOS_MANUAL_OVERIDE","FALSE");
+				m_Comms.Notify("MOOS_MANUAL_OVERIDE","FALSE");
 				m_Comms.Notify("MOOS_MANUAL_OVERRIDE","FALSE");
 				//Desativar o controle do barco baseado no pHelm
 				m_Comms.Notify("DISABLE_CONTROLEBARCO","false");

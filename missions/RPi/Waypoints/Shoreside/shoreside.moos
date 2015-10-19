@@ -5,7 +5,7 @@
 
 ServerHost = localhost
 ServerPort = 9000
-Community  = alpha
+Community  = shoreside
 
 MOOSTimeWarp = 1
 TERM_REPORTING = true
@@ -25,14 +25,14 @@ ProcessConfig = ANTLER
  //-----------------------------------------
   Run = MOOSDB		    @ NewConsole = false
   Run = pLogger         @ NewConsole = false
-  Run = pMarineViewer	@ NewConsole = false
+  Run = pMarineViewer	@ NewConsole = true
   Run = uProcessWatch	@ NewConsole = false
-  Run = pNodeReporter	@ NewConsole = false
  
  // Transmissao de dados
  //-----------------------------------------
  // pShare: transmissao de informacoes
   Run = pShare				@ NewConsole = false
+  Run = uFldShoreBroker @ NewConsole = true
   
   //	Controle Manual
   //--------------------------------------
@@ -167,9 +167,11 @@ ProcessConfig = pNodeReporter
 
   platform_type   = SHIP
   platform_length = 1
+  
+  //CROSSFILL_POLICY = fill-empty
 }
 
-//CROSSFILL_POLICY = fill-empty
+
 
 // This block is here in conjunction with the uTermCommand 
 // documentation to demonstrate functionality of that tool.
@@ -196,16 +198,51 @@ ProcessConfig = pManual
    
 }
 
+//==================================================================
+// Inter-vehicle Communication
+//==================================================================
+
+//------------------------------------------
+//uFldShoreBroker block
+ProcessConfig = uFldShoreBroker                                 
+{                                                               
+  AppTick   = 4                                                 
+  CommsTick = 4
+  
+                                                   
+                                                                
+  warning_on_stale = false  (default)                           
+                                                                
+  qbridge = RETURN, DEPLOY 
+  qbridge = NODE_REPORT, STATION_KEEP                       
+                                                                
+  //qbridge = RETURN                                              
+  //qbridge = NODE_REPORT, STATION_KEEP                                          //bridge = src=UP_LOITER_$N, alias=UP_LOITER                    
+                                                                
+  // Note: [qbridge = FOO]  is shorthand for                    
+  //       [bridge = src=FOO_$V,  alias=FOO] and                
+  //       [bridge = src=FOO_ALL, alias=FOO]                    
+}
+
+
 //------------------------------------------
 //pShare block
 ProcessConfig = pShare 
 {
 	//Input = route = ComputerYouWantToListen_IP:OUTPUTPORT_of_TheComputer
-	Input = route = 192.168.0.104:9001
+	//Port to listen
+	Input = route = localhost:9001
 
-	//Output vars -> mission vars and pManual
-	Output = src_name = M1, route = 192.168.0.104:9001
-	Output = src_name = M2, route = 192.168.0.104:9001
-	
+	//Variables specific to the bhv file and mission config
+	//Output = src_name = DEPLOY, route = 192.168.0.104:9001
+	//Output = src_name = RETURN, route = 192.168.0.104:9001
+	//Output = src_name = RETURN*, route = 192.168.0.104:9001
+	//Specific from the manual control
+	//Output = src_name = M1, route = 192.168.0.104:9001
+	//Output = src_name = M2, route = 192.168.0.104:9001
+	//Output = src_name = MANUAL_CONTROL, route = 192.168.0.104:9001
+	//Output = src_name = MOOS_MANUAL_OVERRIDE, route = 192.168.0.104:9001
+	//Output = src_name = MOOS_MANUAL_OVERIDE, route = 192.168.0.104:9001
+	//Output = src_name = DISABLE_CONTROLEBARCO, route = 192.168.0.104:9001
 	
 }
