@@ -25,14 +25,14 @@ ProcessConfig = ANTLER
  //-----------------------------------------
   Run = MOOSDB		    @ NewConsole = false
   Run = pLogger         @ NewConsole = false
-  Run = pMarineViewer	@ NewConsole = true
+  Run = pMarineViewer	@ NewConsole = false
   Run = uProcessWatch	@ NewConsole = false
  
  // Transmissao de dados
  //-----------------------------------------
  // pShare: transmissao de informacoes
   Run = pShare				@ NewConsole = false
-  Run = uFldShoreBroker @ NewConsole = true
+  Run = uFldShoreBroker 	@ NewConsole = false
   
   //	Controle Manual
   //--------------------------------------
@@ -208,17 +208,10 @@ ProcessConfig = uFldShoreBroker
 {                                                               
   AppTick   = 4                                                 
   CommsTick = 4
-  
-                                                   
-                                                                
-  warning_on_stale = false  (default)                           
-                                                                
+                      
   qbridge = RETURN, DEPLOY 
-  qbridge = NODE_REPORT, STATION_KEEP                       
-                                                                
-  //qbridge = RETURN                                              
-  //qbridge = NODE_REPORT, STATION_KEEP                                          //bridge = src=UP_LOITER_$N, alias=UP_LOITER                    
-                                                                
+  qbridge = NODE_REPORT, STATION_KEEP, NODE_MESSAGE
+  qbridge = M1, M2, MOOS_MANUAL_OVERRIDE, MOOS_MANUAL_OVERIDE                                    
   // Note: [qbridge = FOO]  is shorthand for                    
   //       [bridge = src=FOO_$V,  alias=FOO] and                
   //       [bridge = src=FOO_ALL, alias=FOO]                    
@@ -229,20 +222,7 @@ ProcessConfig = uFldShoreBroker
 //pShare block
 ProcessConfig = pShare 
 {
-	//Input = route = ComputerYouWantToListen_IP:OUTPUTPORT_of_TheComputer
 	//Port to listen
 	Input = route = localhost:9001
-
-	//Variables specific to the bhv file and mission config
-	//Output = src_name = DEPLOY, route = 192.168.0.104:9001
-	//Output = src_name = RETURN, route = 192.168.0.104:9001
-	//Output = src_name = RETURN*, route = 192.168.0.104:9001
-	//Specific from the manual control
-	//Output = src_name = M1, route = 192.168.0.104:9001
-	//Output = src_name = M2, route = 192.168.0.104:9001
-	//Output = src_name = MANUAL_CONTROL, route = 192.168.0.104:9001
-	//Output = src_name = MOOS_MANUAL_OVERRIDE, route = 192.168.0.104:9001
-	//Output = src_name = MOOS_MANUAL_OVERIDE, route = 192.168.0.104:9001
-	//Output = src_name = DISABLE_CONTROLEBARCO, route = 192.168.0.104:9001
 	
 }
