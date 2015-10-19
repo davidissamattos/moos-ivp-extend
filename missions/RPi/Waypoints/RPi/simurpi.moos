@@ -226,10 +226,22 @@ ProcessConfig = uFldNodeBroker
     AppTick	= 4
     CommsTick	= 4
 	
-	try_shore_host = pshare_route:localhost:9000
-	try_shore_host = pshare_route:localhost:9001
-	try_shore_host = 192.168.0.101:localhost:9000
-	try_shore_host = 192.168.0.101:localhost:9001
+	try_shore_host = pshare_route=localhost:9000
+	try_shore_host = pshare_route=localhost:9001
+	try_shore_host = pshare_route=192.168.0.101:9000
+	try_shore_host = pshare_route=192.168.0.101:9001
+	try_shore_host = pshare_route= 192.168.0.102:9000
+	try_shore_host = pshare_route=192.168.0.102:9001
+	try_shore_host = pshare_route=192.168.0.103:9000
+	try_shore_host = pshare_route=192.168.0.103:9001
+	try_shore_host = pshare_route=192.168.0.104:9000
+	try_shore_host = pshare_route=192.168.0.104:9001
+	try_shore_host = pshare_route=192.168.0.105:9000
+	try_shore_host = pshare_route=192.168.0.105:9001
+	try_shore_host = pshare_route=192.168.0.106:9000
+	try_shore_host = pshare_route=192.168.0.106:9001
+	try_shore_host = pshare_route=192.168.0.107:9000
+	try_shore_host = pshare_route=192.168.0.107:9001
 	
 	//Data to be send to the shoreside
 	bridge = src=NODE_REPORT
