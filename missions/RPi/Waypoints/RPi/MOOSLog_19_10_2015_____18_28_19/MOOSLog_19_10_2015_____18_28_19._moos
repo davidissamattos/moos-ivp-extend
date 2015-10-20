@@ -1,10 +1,15 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LOG FILE:       ./MOOSLog_19_10_2015_____18_28_19/MOOSLog_19_10_2015_____18_28_19._moos
+%% FILE OPENED ON  Wed Dec 31 21:00:00 1969
+%% LOGSTART               1445286498.47
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //-------------------------------------------------
 // NAME: David
 // FILE: alpha.moos
 //-------------------------------------------------
 
 ServerHost = localhost
-ServerPort = 9001
+ServerPort = 9000
 Community  = RPi
 
 MOOSTimeWarp = 1
@@ -23,12 +28,12 @@ ProcessConfig = ANTLER
  
  //Aplicativos do MOOS-IvP para a navegacao
  //-----------------------------------------
-  Run = MOOSDB		@ NewConsole = false
-  Run = pLogger         @ NewConsole = false
-  Run = pControleBarco	@ NewConsole = false
-  Run = pHelmIvP	@ NewConsole = false
-  Run = uProcessWatch	@ NewConsole = false
-  Run = pNodeReporter	@ NewConsole = false
+  Run = MOOSDB		    	@ NewConsole = false
+  Run = pLogger        		@ NewConsole = false
+  Run = pControleBarco		@ NewConsole = false
+  Run = pHelmIvP	    	@ NewConsole = false
+  Run = uProcessWatch		@ NewConsole = false
+  Run = pNodeReporter		@ NewConsole = true
   
  // Transmissao de dados
  //-----------------------------------------
@@ -43,7 +48,6 @@ ProcessConfig = ANTLER
   Run = pKalmanSensorFusion		@ NewConsole = false
 
 }
-
 
 //------------------------------------------------
 // uBarcoSimuKalman config block
@@ -241,7 +245,7 @@ ProcessConfig = uFldNodeBroker
     AppTick	= 4
     CommsTick	= 4
 	
-	try_shore_host = pshare_route=192.168.0.103:9100
+	try_shore_host = pshare_route=192.168.0.107:9100
 	
 	//Data to be send to the shoreside
 	bridge = src=NODE_REPORT
@@ -264,5 +268,6 @@ ProcessConfig = uFldNodeBroker
 ProcessConfig = pShare 
 {
 	//Where to listen
-	input = route = localhost:9101
+	input = route = "localhost:9100"
 }
+

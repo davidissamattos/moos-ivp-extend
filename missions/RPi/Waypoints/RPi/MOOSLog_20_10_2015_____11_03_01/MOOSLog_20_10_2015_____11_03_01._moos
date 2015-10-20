@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LOG FILE:       ./MOOSLog_20_10_2015_____11_03_01/MOOSLog_20_10_2015_____11_03_01._moos
+%% FILE OPENED ON  Wed Dec 31 21:00:00 1969
+%% LOGSTART               14453461810.5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //-------------------------------------------------
 // NAME: David
 // FILE: alpha.moos
@@ -7,7 +12,9 @@ ServerHost = localhost
 ServerPort = 9001
 Community  = RPi
 
-MOOSTimeWarp = 1
+//----  Next Line was commented and replaced with a command line overload ---- //
+//MOOSTimeWarp = 1    (default)
+MOOSTimeWarp = 10
 TERM_REPORTING = true
 
 
@@ -27,6 +34,7 @@ ProcessConfig = ANTLER
   Run = pLogger         @ NewConsole = false
   Run = pControleBarco	@ NewConsole = false
   Run = pHelmIvP	@ NewConsole = false
+  Run = pMarineViewer	@ NewConsole = false
   Run = uProcessWatch	@ NewConsole = false
   Run = pNodeReporter	@ NewConsole = false
   
@@ -43,6 +51,82 @@ ProcessConfig = ANTLER
   Run = pKalmanSensorFusion		@ NewConsole = false
 
 }
+
+
+//------------------------------------------
+// pMarineViewer config block
+
+ProcessConfig = pMarineViewer
+{
+  AppTick    = 10
+  CommsTick  = 10
+
+  tiff_file            = ITA_lago.tif
+
+  set_pan_x            = -20
+  set_pan_y            = -20
+  zoom                 = 0.6
+  vehicle_shape_scale  = 1.5
+  hash_delta           = 50
+  hash_shade           = 0.4
+  hash_viewable        = true
+
+  trails_point_size   = 1
+
+  // Appcast configuration
+  appcast_height       = 75
+  appcast_width        = 30
+  appcast_viewable     = true
+  appcast_color_scheme = indigo
+  nodes_font_size      = medium
+  procs_font_size      = medium
+  appcast_font_size    = small
+  
+  left_context[survey-point] = DEPLOY=true
+  left_context[survey-point] = MOOS_MANUAL_OVERIDE=false
+  left_context[survey-point] = RETURN=false
+
+  right_context[return] = DEPLOY=true
+  right_context[return] = MOOS_MANUAL_OVERIDE=false
+  right_context[return] = RETURN=false
+
+//Testes com a interface
+  //Mudancas com o mouse
+  left_context[return_point] = VIEW_SEGLIST = pts={$(XPOS),$(YPOS)},label=return_home
+  left_context[return_point]  = RETURN_UPDATE = points=$(XPOS),$(YPOS)
+  left_context[return_point]  = RETURN = true
+  left_context[view_point] = VIEW_POINT = x=$(XPOS),y=$(YPOS),label=mypoint
+  scope = WPT_UPDATE
+  scope  = NAV_X
+  scope  = NAV_Y
+  
+//fim das alteracoes
+
+  
+
+  scope  = RETURN
+  scope  = WPT_STAT
+  scope  = VIEW_SEGLIST
+  scope  = VIEW_POINT
+  scope  = VIEW_POLYGON
+  scope  = MVIEWER_LCLICK
+  scope  = MVIEWER_RCLICK
+
+//Configuracoes dos botoes
+  //button_name = text # VARIABLE=value
+  button_one = START # DEPLOY=true #  MOOS_MANUAL_OVERRIDE=false
+  button_one = MOOS_MANUAL_OVERRIDE=false # RETURN=false 
+  button_two = RETURN:T # RETURN=true
+  button_three = RETURN:F # RETURN=false
+  
+  
+
+  action  = MENU_KEY=deploy # DEPLOY = true # RETURN = false
+  action+ = MENU_KEY=deploy # MOOS_MANUAL_OVERRIDE=false
+  action  = RETURN=true
+  action  = UPDATES_RETURN=speed=1.4
+}
+
 
 
 //------------------------------------------------
@@ -266,3 +350,5 @@ ProcessConfig = pShare
 	//Where to listen
 	input = route = localhost:9101
 }
+
+

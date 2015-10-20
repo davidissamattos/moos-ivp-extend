@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LOG FILE:       ./MOOSLog_20_10_2015_____10_56_04/MOOSLog_20_10_2015_____10_56_04._moos
+%% FILE OPENED ON  Wed Dec 31 21:00:00 1969
+%% LOGSTART               14453457641.7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //-------------------------------------------------
 // NAME: David
 // FILE: alpha.moos
@@ -7,7 +12,9 @@ ServerHost = localhost
 ServerPort = 9001
 Community  = RPi
 
-MOOSTimeWarp = 1
+//----  Next Line was commented and replaced with a command line overload ---- //
+//MOOSTimeWarp = 1    (default)
+MOOSTimeWarp = 10
 TERM_REPORTING = true
 
 
@@ -23,12 +30,12 @@ ProcessConfig = ANTLER
  
  //Aplicativos do MOOS-IvP para a navegacao
  //-----------------------------------------
-  Run = MOOSDB		@ NewConsole = false
-  Run = pLogger         @ NewConsole = false
-  Run = pControleBarco	@ NewConsole = false
-  Run = pHelmIvP	@ NewConsole = false
-  Run = uProcessWatch	@ NewConsole = false
-  Run = pNodeReporter	@ NewConsole = false
+  Run = MOOSDB		    	@ NewConsole = false
+  Run = pLogger        		@ NewConsole = false
+  Run = pControleBarco		@ NewConsole = false
+  Run = pHelmIvP	    	@ NewConsole = true
+  Run = uProcessWatch		@ NewConsole = false
+  Run = pNodeReporter		@ NewConsole = true
   
  // Transmissao de dados
  //-----------------------------------------
@@ -43,7 +50,6 @@ ProcessConfig = ANTLER
   Run = pKalmanSensorFusion		@ NewConsole = false
 
 }
-
 
 //------------------------------------------------
 // uBarcoSimuKalman config block
@@ -266,3 +272,5 @@ ProcessConfig = pShare
 	//Where to listen
 	input = route = localhost:9101
 }
+
+
