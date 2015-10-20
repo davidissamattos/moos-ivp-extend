@@ -6,10 +6,14 @@ class moosjson:
     def __init__(self,filename):
         self.community = "No name"
         self.moostime = "No time"
-        file = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../json/'+filename)
-        self.jsonObject = json.loads(open(file).read())
-        self.variables = {}
-        self.getData()
+        try:
+            file = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../json/'+filename)
+            self.jsonObject = json.loads(open(file).read())
+            self.variables = {}
+            self.getData()
+            self.boolRead = True
+        except:
+            self.boolRead = False
         
         
     def getData(self):

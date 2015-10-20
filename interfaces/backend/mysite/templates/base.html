@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>MOOS-IvP Web Interface</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -31,10 +31,13 @@
  <!--******************* SIDEBAR ******************** --> 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="{% static "assets/img/sidebar-5.jpg"%}">        
+    <div class="sidebar" data-color="blue" data-image="{% static "assets/img/sidebar-5.jpg"%}">
+		        
     	<div class="sidebar-wrapper">
             <div class="logo">
-                   MOOS-IvP Web Interface
+                <a href="/Dashboard/" class="simple-text">
+                    MOOS-IvP Web Interface
+                </a>
             </div>
                        
             <ul class="nav">
@@ -44,22 +47,24 @@
                         <p>Dashboard</p>
                     </a>            
                 </li>
-                <li>
-                    <a href="/VehicleCharacteristics/">
-                        <i class="pe-7s-user"></i> 
-                        <p>Vehicle Characteristics</p>
-                    </a>
-                </li> 
-         
+               
                 <li>
                     <a href="/CameraView/">
-                        <i class="pe-7s-science"></i> 
+                        <i class="pe-7s-video"></i> 
                         <p>Camera View</p>
                     </a>        
                 </li>
+				
+                <li>
+                    <a href="/VehicleCharacteristics/">
+                        <i class="pe-7s-ticket"></i> 
+                        <p>Vehicle Characteristics</p>
+                    </a>
+                </li>
+				
                 <li>
                     <a href="/About/">
-                        <i class="pe-7s-bell"></i> 
+                        <i class="pe-7s-users"></i> 
                         <p>About</p>
                     </a>        
                 </li>
