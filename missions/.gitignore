@@ -1,5 +1,6 @@
 *._moos
 *.LastOpenedMOOSLogDirectory
+*.moos++
 *._bhv
 *.alog
 *.blog
