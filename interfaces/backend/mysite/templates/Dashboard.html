@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+       
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Value for Vehicle: {{ vehicle_name }}</h4>
+                                <p class="category">Configure variables in mission file.</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>MOOS Time</th>
+                                    	<th>Variable</th>
+                                    	<th>Value</th>
+                                    </thead>
+                                    <tbody>
+										{% for k,v in variables.iteritems %}
+											<tr>
+	                                        	<td>{{moos_time}}</td>
+	                                        	<td>{{ k }}</td>
+	                                        	<td>{{ v }}</td>
+											</tr>
+										{% endfor %} 
+                                    </tbody>
+                                </table>
+                                   
+                            </div>
+                        </div>
+       
+{% endblock %}

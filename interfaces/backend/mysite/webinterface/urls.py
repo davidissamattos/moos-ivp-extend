@@ -17,8 +17,9 @@ from django.conf.urls import include, url
 from webinterface.webinterfaceview import *
 
 urlpatterns = [
-    url(r'^$', index),
-    url(r'^camera/$', camera),
-    url(r'^variables/$', variables),
-    url(r'^info/$', info),
+    url(r'^$', Dashboard),
+    url(r'^CameraView/$', CameraView),
+     url(r'^VehicleCharacteristics/$', VehicleCharacteristics),
+    url(r'^Dashboard/$', Dashboard),
+    url(r'^About/$', About),
 ]

@@ -2,32 +2,44 @@ from django.http import HttpResponse
 from django.template import Context, Template
 from django.template.loader import get_template
 import datetime
+import moos
 
 
-def index(request):
-    indx = get_template('index.html')
+def CameraView(request):
+    t = get_template('CameraView.html')
     #Render template
-    c = Context()
-    html = indx.render(c)
+    c = Context({'status_bar': 'Camera View',
+        
+    })
+    html = t.render(c)
     return HttpResponse(html)
 
-def camera(request):
-    t = get_template('camera.html')
+def VehicleCharacteristics(request):
+    t = get_template('VehicleCharacteristics.html')
     #Render template
-    c = Context()
+    c = Context({'status_bar': 'Vehicle Characteristics',
+        
+    })
     html = t.render(c)
     return HttpResponse(html)
     
-def variables(request):
-    t = get_template('variables.html')
+def Dashboard(request):
+    t = get_template('Dashboard.html')
     #Render template
-    c = Context()
+    mymoos = moos.moosjson("shoreside.json")
+    c = Context({'status_bar': 'Dashboard',
+                 'variables': mymoos.variables,
+                 'vehicle_name': mymoos.community,
+                 'moos_time': mymoos.moostime,
+    })
     html = t.render(c)
-    return HttpResponse(t)
+    return HttpResponse(html)
     
-def info(request):
-    t = get_template('info.html')
+def About(request):
+    t = get_template('About.html')
     #static page but renders
-    c = Context()
+    c = Context({'status_bar': 'About'
+        
+    })
     html = t.render(c)
     return HttpResponse(html)
