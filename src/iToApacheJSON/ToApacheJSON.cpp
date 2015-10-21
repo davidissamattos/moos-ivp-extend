@@ -21,6 +21,7 @@ ToApacheJSON::ToApacheJSON()
   m_timewarp   = 1;
   json_file_name = "";
   community = "";
+  start_time = MOOSTime();
 }
 
 //---------------------------------------------------------
@@ -93,7 +94,7 @@ bool ToApacheJSON::Iterate()
 	if(m_iterations>1)
 	{
 		
-		root["MOOSTime"] = MOOSTime();
+		root["MOOSTime"] = MOOSTime()-start_time;
 		root["Community"] = community;
 		for(std::vector<std::string>::iterator it = variables.begin(); it != variables.end(); ++it) 
 		{

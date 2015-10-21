@@ -18,8 +18,9 @@ from webinterface.webinterfaceview import *
 
 urlpatterns = [
     url(r'^$', Dashboard),
-    url(r'^CameraView/$', CameraView),
-     url(r'^VehicleCharacteristics/$', VehicleCharacteristics),
-    url(r'^Dashboard/$', Dashboard),
-    url(r'^About/$', About),
+    url(r'^CameraView/$', CameraView, name="CameraView"),
+    url(r'^VehicleCharacteristics/$', VehicleCharacteristics,  name="VehicleCharacteristics"),
+    url(r'^Dashboard/$', Dashboard, name="Dashboard"),
+    url(r'^Dashboard/ReloadData/$', ReloadDashboardData, name="ReloadDashboardData"),
+    url(r'^About/$', About, name="About"),
 ]

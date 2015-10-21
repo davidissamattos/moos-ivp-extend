@@ -36,7 +36,8 @@ ProcessConfig = ANTLER
   
   // Webserver
   //-----------------------------------------
-  // iToApacheJSON: 
+  // iToApacheJSON
+  Run = iToApacheJSON		@ NewConsole = false
   
   
   //	Controle Manual
@@ -202,6 +203,19 @@ ProcessConfig = pManual
    CommsTick = 100
    
 }
+
+//------------------------------------------------
+// iToApacheJSON config block
+
+ProcessConfig = iToApacheJSON
+{
+   AppTick   = 4
+   CommsTick = 4
+   VARIABLES = NAV_*,DESIRED_* , M1, M2 
+   PATH = /Users/David/moos-ivp-extend/interfaces/backend/mysite/json/
+   JSON_FILE_NAME = shoreside 
+}
+
 
 //==================================================================
 // Inter-vehicle Communication

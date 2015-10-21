@@ -8,8 +8,9 @@ from boat import boat
 
 def CameraView(request):
     t = get_template('CameraView.html')
-    #Render template
+    cameraURL = "http://192.168.0.10:8081"
     c = Context({'status_bar': 'Camera View',
+                 'cameraURL': cameraURL,
         
     })
     html = t.render(c)
@@ -36,6 +37,23 @@ def Dashboard(request):
     mymoos = moos.moosjson("shoreside.json")
     if mymoos.boolRead == True:
         t = get_template('Dashboard.html')
+        #Render template 
+        c = Context({'status_bar': 'Dashboard',
+                     'variables': mymoos.variables,
+                     'vehicle_name': mymoos.community,
+                     'moos_time': mymoos.moostime,
+                     })
+    else:
+        c = Context({'status_bar': 'Dashboard',})
+        t = get_template('ErrorJSON.html')
+   
+    html = t.render(c)
+    return HttpResponse(html)
+    
+def ReloadDashboardData(request):
+    mymoos = moos.moosjson("shoreside.json")
+    if mymoos.boolRead == True:
+        t = get_template('DashboardTable.html')
         #Render template 
         c = Context({'status_bar': 'Dashboard',
                      'variables': mymoos.variables,

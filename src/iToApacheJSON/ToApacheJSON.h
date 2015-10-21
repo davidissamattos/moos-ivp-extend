@@ -45,6 +45,7 @@ class ToApacheJSON : public CMOOSApp
    unsigned int m_iterations;
    double       m_timewarp;
    
+   double start_time;
    //Variables to subscribe and post
    std::vector<string> variables;
    std::vector<string> variablesValues;

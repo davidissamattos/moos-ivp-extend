@@ -31,39 +31,39 @@
  <!--******************* SIDEBAR ******************** --> 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="blue" data-image="{% static "assets/img/sidebar-5.jpg"%}">
+    <div class="sidebar" data-color="blue" data-image="{% static "assets/img/sidebar-ita.jpg"%}">
 		        
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="/Dashboard/" class="simple-text">
+                <a href="{% url 'Dashboard' %}" class="simple-text">
                     MOOS-IvP Web Interface
                 </a>
             </div>
                        
             <ul class="nav">
                 <li >
-                    <a href="/Dashboard/">
+                    <a href="{% url 'Dashboard' %}">
                         <i class="pe-7s-graph"></i> 
                         <p>Dashboard</p>
                     </a>            
                 </li>
                
                 <li>
-                    <a href="/CameraView/">
+                    <a href="{% url 'CameraView' %}">
                         <i class="pe-7s-video"></i> 
                         <p>Camera View</p>
                     </a>        
                 </li>
 				
                 <li>
-                    <a href="/VehicleCharacteristics/">
+                    <a href="{% url 'VehicleCharacteristics' %}">
                         <i class="pe-7s-ticket"></i> 
                         <p>Vehicle Characteristics</p>
                     </a>
                 </li>
 				
                 <li>
-                    <a href="/About/">
+                    <a href="{% url 'About' %}">
                         <i class="pe-7s-users"></i> 
                         <p>About</p>
                     </a>        
@@ -121,20 +121,46 @@
 
 </body>
 
-    <!--   Core JS Files   -->
+    <!--   Core JS Files   -->	
     <script src="{% static "assets/js/jquery-1.10.2.js" %}" type="text/javascript"></script>
 	<script src="{% static "assets/js/bootstrap.min.js" %}" type="text/javascript"></script>
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="{% static "assets/js/bootstrap-checkbox-radio-switch.js" %}"></script>
 	<!--  Charts Plugin -->
-	<script src="{% static "assets/js/chartist.min.js" %}"></script>
+	<!-- <script src="{% static "assets/js/chartist.min.js" %}"></script>-->
     <!--  Notifications Plugin    -->
-    <script src="{% static "assets/js/bootstrap-notify.js" %}"></script>
+   <!--  <script src="{% static "assets/js/bootstrap-notify.js" %}"></script> -->
     <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+   <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
 	
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="{% static "assets/js/light-bootstrap-dashboard.js" %}"></script>
+	<script src="{% static "assets/js/light-bootstrap-dashboard.js" %}"></script>  
 	
-    
+	
+	
+<!-- *********** Automatically reloading page ************ -->
+
+<script>
+	function refresh()
+	{
+	    $.ajax({
+	        url: '{% url 'ReloadDashboardData' %}',
+	        success: function(data)
+			{
+	            $('#update').html(data);
+	        }
+	    });
+	    setInterval("refresh()", 1000);
+	}
+
+	$(function(){
+	    refresh();
+	});
+</script>
+
+
+	
+	
+	
+	
 </html>
