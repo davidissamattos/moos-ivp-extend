@@ -23,10 +23,10 @@ ProcessConfig = ANTLER
  
  //Aplicativos do MOOS-IvP para a navegacao
  //-----------------------------------------
-  Run = MOOSDB		@ NewConsole = false
+  Run = MOOSDB			@ NewConsole = false
   Run = pLogger         @ NewConsole = false
   Run = pControleBarco	@ NewConsole = false
-  Run = pHelmIvP	@ NewConsole = false
+  Run = pHelmIvP		@ NewConsole = false
   Run = uProcessWatch	@ NewConsole = false
   Run = pNodeReporter	@ NewConsole = false
   
@@ -241,7 +241,7 @@ ProcessConfig = uFldNodeBroker
     AppTick	= 4
     CommsTick	= 4
 	
-	try_shore_host = pshare_route=192.168.0.103:9100
+	try_shore_host = pshare_route=192.168.0.101:9100
 	
 	//Data to be send to the shoreside
 	bridge = src=NODE_REPORT
