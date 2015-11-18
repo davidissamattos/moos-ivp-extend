@@ -79,17 +79,17 @@ ProcessConfig = uBarcoSimu3Kalman
 {
    AppTick   = 4
    CommsTick = 4
-   SIGMA_GPSX = 0
-   SIGMA_GPSY = 0
-   SIGMA_AX = 0
-   SIGMA_AY = 0
-   SIGMA_WZ = 0
-   SIGMA_HEADING = 0
-   BIAS_AX = 0
-   BIAS_AY = 0
-   BIAS_WZ = 0
-   POSX = -5
-   POSY = -7
+   SIGMA_GPSX = 0.1
+   SIGMA_GPSY = 0.1
+   SIGMA_AX = 0.1
+   SIGMA_AY = 0.1
+   SIGMA_WZ = 0.01
+   SIGMA_HEADING = 0.01
+   BIAS_AX = 0.1
+   BIAS_AY = 0.1
+   BIAS_WZ = 0.1
+   POSX = -6
+   POSY = -8
 }
 
 

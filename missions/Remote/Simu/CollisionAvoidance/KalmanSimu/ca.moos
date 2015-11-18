@@ -86,8 +86,8 @@ ProcessConfig = uBarcoSimu3Kalman
    BIAS_AX = 0.1
    BIAS_AY = 0.1
    BIAS_WZ = 0.1
-   POSX = -5
-   POSY = -7
+   POSX = -6
+   POSY = -8
 }
 
 

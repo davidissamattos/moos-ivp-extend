@@ -58,13 +58,13 @@ Behavior=BHV_Waypoint
   priority        = 200
 
   //Description of the polygon
-  polygon         = format=radial, label=obs1, x=15, y=2, radius=5, pts=4
+  polygon         = format=radial, label=obs1, x=15, y=2, radius=3, pts=4
   //Allowable Time to collision in Seconds
   allowable_ttc   = 20
   //Distance where the behavior is activated
   activation_dist = 20  
   //Distance around of the polygon regarded as virtual collision 
-  buffer_dist     = 5
+  buffer_dist     = 4
   //Range to contact within which the behavior has maximum priority weight
   //pwt_inner_dist =
   //Range to contact outside which the behavior has zero priority weight
@@ -82,10 +82,10 @@ Behavior = BHV_AvoidObstacle
   name      = obstacle1
   priority        = 200
  
-  polygon         = format=radial, label=obs1, x=24, y=30, radius=4, pts=12
+  polygon         = format=radial, label=obs1, x=24, y=30, radius=3, pts=12
   allowable_ttc   = 20
   activation_dist = 10  
-  buffer_dist     = 2
+  buffer_dist     = 4
   
 }
 
@@ -98,10 +98,10 @@ Behavior = BHV_AvoidObstacle
   name      = obstacle2
   priority        = 200
  
-  polygon         = format=radial, label=obs2, x=10, y=10, radius=4, pts=12
+  polygon         = format=radial, label=obs2, x=10, y=10, radius=3, pts=12
   allowable_ttc   = 20
   activation_dist = 10  
-  buffer_dist     = 2
+  buffer_dist     = 4
   
 }
 
@@ -113,10 +113,10 @@ Behavior = BHV_AvoidObstacle
   name      = obstacle3
   priority        = 200
  
-  polygon         = format=radial, label=obs3, x=10, y=55, radius=4, pts=12
+  polygon         = format=radial, label=obs3, x=10, y=55, radius=3, pts=12
   allowable_ttc   = 20
   activation_dist = 10  
-  buffer_dist     = 2
+  buffer_dist     = 4
   
 }
 
@@ -128,9 +128,9 @@ Behavior = BHV_AvoidObstacle
   name      = obstacle4
   priority        = 200
  
-  polygon         = format=radial, label=obs4, x=-15, y=15, radius=4, pts=12
+  polygon         = format=radial, label=obs4, x=-15, y=15, radius=3, pts=12
   allowable_ttc   = 20
   activation_dist = 10  
-  buffer_dist     = 2
+  buffer_dist     = 4
   
 }

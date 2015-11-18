@@ -45,6 +45,21 @@ ProcessConfig = ANTLER
 //------------------------------------------
 // uProcessWatch config block
 
+ProcessConfig = uBarcoSimu
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  POSX = -6
+  POSY = -8
+  HEADING = 300
+  
+}
+
+
+//------------------------------------------
+// uProcessWatch config block
+
 ProcessConfig = uProcessWatch
 {
   AppTick   = 10
