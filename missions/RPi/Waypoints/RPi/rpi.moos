@@ -35,6 +35,7 @@ ProcessConfig = ANTLER
  // pShare: transmissao de informacoes
   Run = pShare				@ NewConsole = false
   Run = uFldNodeBroker  	@ NewConsole = false
+  Run = pHostInfo			@ NewConsole = false
  
   //Executando no barco real
   //--------------------------------------
@@ -212,10 +213,10 @@ ProcessConfig = uFldNodeBroker
     AppTick	= 4
     CommsTick	= 4
 	//Localhost
-	try_shore_host = pshare_route=localhost:9000
-	try_shore_host = pshare_route=localhost:9001
+	//try_shore_host = pshare_route=localhost:9000
+	//try_shore_host = pshare_route=localhost:9001
 	//Mac OS X - DavidIssa Mattos
-	try_shore_host = pshare_route =192.168.0.101:9000
+	try_shore_host = pshare_route = 192.168.0.101:9000
 	try_shore_host = pshare_route = 192.168.0.101:9001
 	
 	//Data to be send to the shoreside
@@ -240,4 +241,15 @@ ProcessConfig = pShare
 {
 	//Where to listen
 	Input = route = localhost:9001
+}
+
+//--------------------------------------------------
+// pHostInfo configuration block
+
+ProcessConfig = pHostInfo
+{
+  AppTick 	= 1
+  CommsTick 	= 1
+
+  DEFAULT_HOSTIP = localhost
 }

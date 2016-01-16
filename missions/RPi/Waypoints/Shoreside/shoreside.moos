@@ -33,6 +33,7 @@ ProcessConfig = ANTLER
  // pShare: transmissao de informacoes
   Run = pShare				@ NewConsole = true
   Run = uFldShoreBroker 	@ NewConsole = true
+  Run = pHostInfo			@ NewConsole = true
   
   // Webserver
   //-----------------------------------------
@@ -227,14 +228,22 @@ ProcessConfig = uFldShoreBroker
 {                                                               
   AppTick   = 4                                                 
   CommsTick = 4
-                      
-  qbridge = RETURN, DEPLOY 
-  qbridge = NODE_REPORT, STATION_KEEP, NODE_MESSAGE
-  qbridge = M1, M2, MOOS_MANUAL_OVERRIDE, MOOS_MANUAL_OVERIDE     
-  
+            
+  qbridge = DEPLOY
+  qbridge = RETURN
+  qbridge = STATION_KEEP
+  qbridge = MOOS_MANUAL_OVERRIDE
+  qbridge = MOOS_MANUAL_OVERIDE
+            
   bridge = src=M1,  alias=M1
   bridge = src=M2,  alias=M2
-  bridge = src=MOOS_MANUAL_OVERRIDE,  alias=MOOS_MANUAL_OVERIDE
+  bridge = src=RETURN,  alias=RETURN
+  bridge = src=DEPLOY,  alias=DEPLOY
+  bridge = src=STATION_KEEP,  alias=STATION_KEEP
+  bridge = src=NODE_MESSAGE,  alias=NODE_MESSAGE
+  bridge = src=MOOS_MANUAL_OVERRIDE,  alias=MOOS_MANUAL_OVERRIDE
+  bridge = src=MOOS_MANUAL_OVERIDE,  alias=MOOS_MANUAL_OVERIDE
+  bridge = src=DISABLE_CONTROLEBARCO,  alias=DISABLE_CONTROLEBARCO
                                  
   // Note: [qbridge = FOO]  is shorthand for                    
   //       [bridge = src=FOO_$V,  alias=FOO] and                
@@ -249,4 +258,15 @@ ProcessConfig = pShare
 	//Port to listen
 	Input = route = localhost:9001
 	
+}
+
+//--------------------------------------------------
+// pHostInfo configuration block
+
+ProcessConfig = pHostInfo
+{
+  AppTick 	= 1
+  CommsTick 	= 1
+
+  DEFAULT_HOSTIP = localhost
 }

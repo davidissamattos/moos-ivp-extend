@@ -1,10 +1,10 @@
 {
-   "Community" : "alpha",
-   "MOOSTime" : 1.8917339,
+   "Community" : "shoreside",
+   "MOOSTime" : 480.79724097251892,
    "Variables" : {
-      "DESIRED_HEADING" : "312.0000",
-      "asdsad" : "0.000000",
-      "M1" : "3.000000",
-      "M2" : "232"
+      "DESIRED_*" : "",
+      "M1" : "0.000000",
+      "M2" : "0.000000",
+      "NAV_*" : ""
    }
 }
