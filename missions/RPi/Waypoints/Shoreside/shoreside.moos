@@ -31,8 +31,8 @@ ProcessConfig = ANTLER
  // Transmissao de dados
  //-----------------------------------------
  // pShare: transmissao de informacoes
-  Run = pShare				@ NewConsole = false
-  Run = uFldShoreBroker 	@ NewConsole = false
+  Run = pShare				@ NewConsole = true
+  Run = uFldShoreBroker 	@ NewConsole = true
   
   // Webserver
   //-----------------------------------------
@@ -247,6 +247,6 @@ ProcessConfig = uFldShoreBroker
 ProcessConfig = pShare 
 {
 	//Port to listen
-	Input = route = localhost:9100
+	Input = route = localhost:9001
 	
 }

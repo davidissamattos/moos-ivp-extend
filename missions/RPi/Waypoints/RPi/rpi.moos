@@ -75,7 +75,7 @@ ProcessConfig = iSerial
    M2=M2
    
    //Opcoes Para interface serial
-   SERIAL_PORT = /dev/tty.SLAB_USBtoUART
+   SERIAL_PORT = /dev/ttyACM0
    BAUDRATE = 9600
 }
 
@@ -210,9 +210,10 @@ ProcessConfig = uFldNodeBroker
 {
     AppTick	= 4
     CommsTick	= 4
-	
+	//Localhost
 	try_shore_host = pshare_route:localhost:9000
 	try_shore_host = pshare_route:localhost:9001
+	//Mac OS X - DavidIssa Mattos
 	try_shore_host = 192.168.0.101:localhost:9000
 	try_shore_host = 192.168.0.101:localhost:9001
 	

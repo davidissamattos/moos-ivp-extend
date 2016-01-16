@@ -1,10 +1,10 @@
 {
-   "Community" : "",
-   "MOOSTime" : 30.723345994949341,
+   "Community" : "shoreside",
+   "MOOSTime" : 983.41014695167542,
    "Variables" : {
       "DESIRED_*" : "",
-      "M1" : "",
-      "M2" : "",
+      "M1" : "0.000000",
+      "M2" : "0.000000",
       "NAV_*" : ""
    }
 }
