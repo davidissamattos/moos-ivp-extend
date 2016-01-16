@@ -335,7 +335,7 @@ void KalmanSensorFusion::RegisterVariables()
 	m_Comms.Register("IMU_WY", 0);
 	m_Comms.Register("IMU_WZ", 0);
 	m_Comms.Register("IMU_WTIME", 0);
-	//Compass
+	//Compass 
 	m_Comms.Register("IMU_HEADING", 0);
 	//GPS
 	m_Comms.Register("GPS_X", 0);

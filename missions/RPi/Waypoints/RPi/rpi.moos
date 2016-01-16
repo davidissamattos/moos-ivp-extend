@@ -96,6 +96,7 @@ ProcessConfig = pKalmanSensorFusion
    COMPASS_VAR = 0.1
    ACCEL_VAR = 0.1
    GYRO_VAR = 0.1
+   USE_COMPASS = NO 
 }
 
 
