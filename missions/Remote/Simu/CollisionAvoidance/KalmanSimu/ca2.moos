@@ -1,8 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% LOG FILE:       ./MOOSLog_5_10_2015_____16_19_49/MOOSLog_5_10_2015_____16_19_49._moos
-%% FILE OPENED ON  Wed Dec 31 21:00:00 1969
-%% LOGSTART               1444072788.61
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //-------------------------------------------------
 // NAME: David
 // FILE: ca.moos
@@ -91,8 +86,8 @@ ProcessConfig = uBarcoSimu3Kalman
    BIAS_AX = 0.1
    BIAS_AY = 0.1
    BIAS_WZ = 0.1
-   POSX = -5
-   POSY = -7
+   POSX = -6
+   POSY = -8
 }
 
 
@@ -150,7 +145,7 @@ ProcessConfig = pHelmIvP
   bhv_dir_not_found_ok = true
   ivp_behavior_dir = /Users/ddmikerb
 
-  behaviors  = ca.bhv
+  behaviors  = ca2.bhv
   domain     = course:0:359:360
   domain     = speed:0:5:20
 }
@@ -278,4 +273,3 @@ ProcessConfig = pManual
    CommsTick = 100
    
 }
-
