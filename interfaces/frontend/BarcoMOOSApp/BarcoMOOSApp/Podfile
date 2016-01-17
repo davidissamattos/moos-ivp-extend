@@ -1,0 +1,21 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target 'BarcoMOOSApp' do
+	pod 'Alamofire', '~> 2.0'
+	pod 'NMSSH'
+	pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+	pod 'Player'
+
+
+end
+
+target 'BarcoMOOSAppTests' do
+
+end
+
+target 'BarcoMOOSAppUITests' do
+
+end
+

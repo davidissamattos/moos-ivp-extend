@@ -1,0 +1,17 @@
+// MOOS file
+
+ServerHost = localhost
+ServerPort = 9000
+
+ProcessConfig = uBarcoDouglas
+{
+   AppTick   = 1
+   CommsTick = 1
+   M1 = M1
+   M2 = M2
+   NAV_X = NAV_X
+   NAV_Y = NAV_Y
+   NAV_SPEED = NAV_SPEED
+   NAV_HEADING = NAV_HEADING
+}
+

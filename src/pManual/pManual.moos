@@ -1,0 +1,11 @@
+//------------------------------------------------
+// pManual config block
+
+ProcessConfig = pManual
+{
+   AppTick   = 10
+   CommsTick = 10
+   CONTROL_TYPE = keyboard // ou KEYBOARD
+   
+}
+

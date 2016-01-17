@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+	{% block content %}
+
+        <div class="card">
+            <div class="header">
+                <h4 class="title">The boat</h4>
+            </div>
+				<br>
+				<img class="img-responsive center-block" src="{% static "img/boat.png"%}" />
+				<br>
+		</div>
+
+
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Characteristics of the boat</h4>
+            </div>
+            <div class="content table-responsive table-full-width">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <th>Characteristicss</th>
+                    	<th>Value</th>
+                    </thead>
+                    <tbody>
+						<tr>
+                        	<td>Mass</td>
+                        	<td>{{mass}}</td>
+						</tr>
+						<tr>
+                        	<td>Dimensions</td>
+                        	<td>{{width}} x {{depth}} x {{height}}</td>
+						</tr>
+						<tr>
+                        	<td>Embedded Computer</td>
+                        	<td>{{computer}}</td>
+						</tr>
+						<tr>
+                        	<td>Router</td>
+                        	<td>{{router}}</td>
+						</tr>
+						<tr>
+                        	<td>IMU</td>
+                        	<td>{{imu}}</td>
+						</tr>
+						<tr>
+                        	<td>GPS Receiver</td>
+                        	<td>{{gps}}</td>
+						</tr>
+						<tr>
+                        	<td>Power Control</td>
+                        	<td>{{PowerControl}}</td>
+						</tr>
+                    </tbody>
+                </table>        
+            </div>
+        </div>
+		
+	{% endblock content %}
