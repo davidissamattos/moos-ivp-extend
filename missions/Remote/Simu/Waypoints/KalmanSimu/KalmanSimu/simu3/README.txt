@@ -1,1 +1,0 @@
-Simulando o mesmo sistema do caso 2 (com controlador) mas agora os estados de entrada do sistema sao dados pelo filtro de Kalman

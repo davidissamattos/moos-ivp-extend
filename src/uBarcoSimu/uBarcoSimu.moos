@@ -1,9 +1,0 @@
-//------------------------------------------------
-// uBarcoSimu config block
-
-ProcessConfig = uBarcoSimu
-{
-   AppTick   = 4
-   CommsTick = 4
-}
-

@@ -1,2 +1,0 @@
-/Users/David/moos-ivp-extend/src/python-moos/build/CMakeFiles/copy.dir
-/Users/David/moos-ivp-extend/src/python-moos/build/CMakeFiles/pymoos.dir
