@@ -152,6 +152,8 @@ ProcessConfig = pHelmIvP
 
   term_report_interval=0
 
+//The raspberry pi doesnt keep the time -> time skew failure - messages are lost...
+  ok_skew = any
   bhv_dir_not_found_ok = true
   ivp_behavior_dir = /Users/ddmikerb
 

@@ -41,12 +41,24 @@ ProcessConfig = ANTLER
   Run = iToApacheJSON		@ NewConsole = false
   
   
+  Run = uKalmanVisual			@ NewConsole = true
+  
+  
   //	Controle Manual
   //--------------------------------------
   Run = pManual			@ NewConsole = true
   
 }
 
+
+//------------------------------------------------
+// uKalmanVisual config block
+
+ProcessConfig = uKalmanVisual
+{
+   AppTick   = 4
+   CommsTick = 4
+}
 
 
 //------------------------------------------
@@ -118,21 +130,21 @@ ProcessConfig = pMarineViewer
   procs_font_size      = medium
   appcast_font_size    = small
   
-  left_context[survey-point] = DEPLOY_ALL=true
-  left_context[survey-point] = MOOS_MANUAL_OVERIDE_ALL=false
-  left_context[survey-point] = RETURN_ALL=false
+  //left_context[survey-point] = DEPLOY=true
+  //left_context[survey-point] = MOOS_MANUAL_OVERIDE=false
+  //left_context[survey-point] = RETURN=false
 
-  right_context[return] = DEPLOY_ALL=true
-  right_context[return] = MOOS_MANUAL_OVERIDE_ALL=false
-  right_context[return] = RETURN_ALL=false
+  //right_context[return] = DEPLOY=true
+  //right_context[return] = MOOS_MANUAL_OVERIDE=false
+  //right_context[return] = RETURN=false
 
 //Testes com a interface
   //Mudancas com o mouse
-  left_context[return_point] = VIEW_SEGLIST = pts={$(XPOS),$(YPOS)},label=return_home
-  left_context[return_point]  = RETURN_UPDATE = points=$(XPOS),$(YPOS)
-  left_context[return_point]  = RETURN_ALL = true
-  left_context[view_point] = VIEW_POINT = x=$(XPOS),y=$(YPOS),label=mypoint
-  scope = WPT_UPDATE
+  //left_context[return_point] = VIEW_SEGLIST = pts={$(XPOS),$(YPOS)},label=return_home
+  //left_context[return_point]  = RETURN_UPDATE = points=$(XPOS),$(YPOS)
+  //left_context[return_point]  = RETURN = true
+  //left_context[view_point] = VIEW_POINT = x=$(XPOS),y=$(YPOS),label=mypoint
+  //scope = WPT_UPDATE
   scope  = NAV_X
   scope  = NAV_Y
   
@@ -150,16 +162,17 @@ ProcessConfig = pMarineViewer
 
 //Configuracoes dos botoes
   //button_name = text # VARIABLE=value
-  button_one = START # DEPLOY_ALL=true #  MOOS_MANUAL_OVERRIDE_ALL=false
-  button_one = MOOS_MANUAL_OVERRIDE_ALL=false # RETURN_ALL=false 
+  button_one = START # DEPLOY_ALL=true
+  button_one = MOOS_MANUAL_OVERIDE_ALL=false
+  button_one = RETURN_ALL=false 
   button_two = RETURN:T # RETURN_ALL=true
   button_three = RETURN:F # RETURN_ALL=false
   
   
 
-  action  = MENU_KEY=deploy # DEPLOY_ALL = true # RETURN_ALL = false
-  action+ = MENU_KEY=deploy # MOOS_MANUAL_OVERRIDE_ALL=false
-  action  = RETURN_ALL=true
+  action  = MENU_KEY=deploy # DEPLOY = true # RETURN = false
+  action+ = MENU_KEY=deploy # MOOS_MANUAL_OVERIDE=false
+  action  = RETURN=true
   action  = UPDATES_RETURN=speed=1.4
 }
 
@@ -234,6 +247,7 @@ ProcessConfig = uFldShoreBroker
   qbridge = STATION_KEEP
   qbridge = MOOS_MANUAL_OVERRIDE
   qbridge = MOOS_MANUAL_OVERIDE
+  qbridge = NODE_MESSAGE
             
   bridge = src=M1,  alias=M1
   bridge = src=M2,  alias=M2
