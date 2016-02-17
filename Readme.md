@@ -17,4 +17,6 @@ This repository is organized as follows:
 
 -   manual: this folder (still empty) will contain my master degree dissertation. It gives a brief overview of MOO-IvP, the ASV used in this work, and a more detailed description of  what was used/developed and how it was used.
 
+-   The folders lib, data and other files are the default of the moos-ivp. Please visit the website, see the class notes labs to see how to extend the moos-ivp to your project.
+
 Any questions please [email](<mailto:issamattos.david@gmail.com>) me so I can help you.
