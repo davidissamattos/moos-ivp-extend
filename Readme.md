@@ -15,8 +15,7 @@ This repository is organized as follows:
 
 -   interfaces: this folder contains human interfaces for the MOOS-IvP, such as a whole website for data visualization written in Django with Bootstrap 3. This is easily modified if you know basic concepts of Django and HTML.
 
--   manual: this folder (still empty) will contain my master degree dissertation. It gives a brief overview of MOO-IvP, the ASV used in this work, and a more detailed description of  what was used/developed and how it was used.
-
 -   The folders lib, data and other files are the default of the moos-ivp. Please visit the website, see the class notes labs to see how to extend the moos-ivp to your project.
 
+In the next few weeks I will be posting a link for my dissertation, which contains a detailed explanation of everything!!!
 Any questions please [email](<mailto:issamattos.david@gmail.com>) me so I can help you.
