@@ -17,5 +17,7 @@ This repository is organized as follows:
 
 -   The folders lib, data and other files are the default of the moos-ivp. Please visit the website, see the class notes labs to see how to extend the moos-ivp to your project.
 
-In the next few weeks I will be posting a link for my dissertation, which contains a detailed explanation of everything!!!
+Some links for my dissertation and publications, which contains a detailed explanation of everything!!!
+- http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=7490541&tag=1
+
 Any questions please [email](<mailto:issamattos.david@gmail.com>) me so I can help you.
