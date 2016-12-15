@@ -19,5 +19,6 @@ This repository is organized as follows:
 
 Some links for my dissertation and publications, which contains a detailed explanation of everything!!!
 - http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=7490541&tag=1
+- The MSc Dissertation is in the root tree of this repo
 
 Any questions please [email](<mailto:issamattos.david@gmail.com>) me so I can help you.
